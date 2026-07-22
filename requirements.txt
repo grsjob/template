@@ -1,0 +1,10 @@
+# --- MCP core ---
+mcp>=1.2.0                 # официальный Python SDK Model Context Protocol (FastMCP)
+httpx>=0.27               # HTTP-клиент для обращения к внешним API из tool-ов
+python-dotenv>=1.0        # загрузка ключей из .env
+
+# --- Клиент-агент (опционально, для локального теста MCP) ---
+# langchain>=0.3
+# langgraph>=0.2
+# langchain-mcp-adapters>=0.1
+# langchain-gigachat>=0.3
