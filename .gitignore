@@ -1,7 +1,17 @@
 .env
+graph/.env
 .venv/
 __pycache__/
 *.pyc
 *.json.result
 result.json
 .idea
+
+# code-graph индексы (пересобираются локально)
+.cgraphy/
+.codegraph/
+.repo-map/
+.ai/repo-graph/
+
+# graphiti / falkordb локальные данные
+graph/falkordb_data/

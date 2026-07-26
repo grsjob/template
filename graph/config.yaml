@@ -1,0 +1,37 @@
+# Пример конфигурации Graphiti MCP.
+# Использовать опционально: смонтировать в контейнер и запустить с --config,
+# либо взять как основу. Дефолты образа обычно уже разумны.
+#
+# Здесь акцент на типах сущностей, полезных для хакатона (кейс «Требования из встречи»).
+
+server:
+  transport: "http"          # http | stdio
+
+llm:
+  provider: "openai"         # openai | anthropic | gemini | groq | azure_openai
+  model: "gpt-4o-mini"
+
+embedder:
+  provider: "openai"
+  model: "text-embedding-3-small"
+
+database:
+  provider: "falkordb"       # falkordb | neo4j
+  providers:
+    falkordb:
+      uri: "${FALKORDB_URI:redis://falkordb:6379}"
+      password: ""
+      database: "default_db"
+
+graphiti:
+  entity_types:
+    - name: "Requirement"
+      description: "Конкретное требование/фича, которую нужно реализовать"
+    - name: "Procedure"
+      description: "Пошаговая процедура или регламент"
+    - name: "Person"
+      description: "Участник встречи или заинтересованное лицо"
+    - name: "Organization"
+      description: "Команда, отдел, заказчик"
+    - name: "Document"
+      description: "Транскрипт, БТ, спецификация, отчёт"

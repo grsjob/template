@@ -1,0 +1,26 @@
+{
+  "_comment": "Примеры доп. MCP-серверов. Скопируй нужный блок в .cursor/mcp.json (в 'mcpServers') и проверь команду запуска для своей ОС. Для GigaCode пропиши те же сервера в его собственном конфиге MCP.",
+
+  "mcpServers": {
+    "hackathon-local": {
+      "command": "python",
+      "args": ["${workspaceFolder}/mcp-server/server_stdio.py"]
+    },
+
+    "graphiti-memory": {
+      "url": "http://localhost:8000/mcp/"
+    },
+
+    "code-graph-cgraphy": {
+      "_note": "Сначала: pip install cgraphy && cgraphy index . — сверь точную команду запуска MCP в README пакета",
+      "command": "cgraphy",
+      "args": ["mcp", "--repo", "${workspaceFolder}"]
+    },
+
+    "code-graph-repo-map": {
+      "_note": "Windows-friendly альтернатива (precompiled tree-sitter). Сверь способ запуска в README пакета",
+      "command": "python",
+      "args": ["-m", "repo_map", "--repo", "${workspaceFolder}"]
+    }
+  }
+}

@@ -11,9 +11,22 @@ template/
 ├── skills/            # (2) шаблоны скиллов: базовый + примеры под 3 кейса
 ├── benchmark/         # мини-фреймворк замера «до/после» (баллы на защите)
 ├── templates/         # шаблоны артефактов: БТ, PR, маппинг тестов
+├── graph/             # слои графа для нейронки: Graphiti (память) + code-graph
+├── docs/              # workflow оптимизации контекста + настройка OpenSpec
+├── .cursor/           # регистрация MCP-серверов (mcp.json + примеры)
 ├── requirements.txt
 └── .env.example
 ```
+
+## Оптимизация контекста для нейронки
+
+Три слоя, чтобы запросы к модели были точнее и дешевле по токенам:
+- **OpenSpec** (намерение) — `docs/setup-openspec.md`
+- **Graphiti** (память/knowledge graph) — `graph/README.md`
+- **code-graph** (структура кода) — `graph/README.md`
+
+Общий обзор и порядок внедрения: `docs/llm-context-workflow.md`.
+Регистрация MCP-серверов: `.cursor/mcp.json` (+ примеры в `.cursor/mcp.example.json`).
 
 ## Быстрый старт
 

@@ -1,0 +1,42 @@
+# Graphiti MCP (память агента) + FalkorDB.
+# Поднимает граф-БД и MCP-сервер Graphiti локально.
+#
+# Запуск:
+#   cd graph
+#   copy .env.example .env    # затем заполнить OPENAI_API_KEY
+#   docker compose up
+#
+# Эндпоинт MCP: http://localhost:8000/mcp/
+# Веб-UI FalkorDB: http://localhost:3000
+#
+# ВАЖНО: это самодостаточный шаблон на базе готового образа zepai/knowledge-graph-mcp.
+# Если что-то поменяется в апстриме — сверься с официальным репо:
+# https://github.com/getzep/graphiti/tree/main/mcp_server
+
+services:
+  falkordb:
+    image: falkordb/falkordb:latest
+    ports:
+      - "6379:6379"   # Redis-протокол графа
+      - "3000:3000"   # веб-UI
+    volumes:
+      - falkordb_data:/data
+
+  graphiti-mcp:
+    image: zepai/knowledge-graph-mcp:latest
+    depends_on:
+      - falkordb
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      # БД: указываем внешний FalkorDB (сервис выше)
+      FALKORDB_URI: "redis://falkordb:6379"
+      # провайдер БД и транспорт
+      # (переопределяют дефолты образа при необходимости)
+      GRAPHITI_TELEMETRY_ENABLED: "${GRAPHITI_TELEMETRY_ENABLED:-false}"
+    command: ["--transport", "http", "--database-provider", "falkordb"]
+
+volumes:
+  falkordb_data:
